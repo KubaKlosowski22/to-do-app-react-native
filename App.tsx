@@ -1,20 +1,60 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
+import { Home } from './src/screens/Home';
+import { LinearGradient } from 'expo-linear-gradient';
+import { Montserrat_400Regular, Montserrat_900Black } from '@expo-google-fonts/montserrat';
+import { preventAutoHideAsync, hideAsync } from 'expo-splash-screen';
+import { loadAsync } from 'expo-font';
+import { useCallback, useEffect, useState } from 'react';
 
-export default function App() {
+const App = () => {
+  const [appIsReady, setAppIsReady] = useState(false);
+
+  useEffect(() => {
+    const prepare = async () => {
+      try {
+        await preventAutoHideAsync();
+        await loadAsync({
+          montserrat: Montserrat_400Regular,
+          montserratBold: Montserrat_900Black,
+        });
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+      } catch (e) {
+        console.warn(e);
+      } finally {
+        setAppIsReady(true);
+      }
+    };
+
+    prepare();
+  }, []);
+
+  const onLayoutRootView = useCallback(async () => {
+    if (appIsReady) {
+      await hideAsync();
+    }
+  }, [appIsReady]);
+
+  if (!appIsReady) {
+    return null;
+  }
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <LinearGradient
+      colors={['#348F50', '#56B4D3']}
+      start={{ x: 0, y: 0 }}
+      end={{ x: 1, y: 1 }}
+      style={styles.app}
+      onLayout={onLayoutRootView}>
+      <Home />
+    </LinearGradient>
   );
-}
+};
+
+export default App;
 
 const styles = StyleSheet.create({
-  container: {
+  app: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    paddingHorizontal: 30,
   },
 });
