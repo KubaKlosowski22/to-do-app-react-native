@@ -6,6 +6,8 @@ import { preventAutoHideAsync, hideAsync } from 'expo-splash-screen';
 import { loadAsync } from 'expo-font';
 import { useCallback, useEffect, useState } from 'react';
 import { colors } from './assets/const/Colors';
+import { Provider as ReduxProvider } from 'react-redux';
+import store from './src/store/store';
 
 const App = () => {
   const [appIsReady, setAppIsReady] = useState(false);
@@ -46,7 +48,9 @@ const App = () => {
       end={{ x: 1, y: 1 }}
       style={styles.app}
       onLayout={onLayoutRootView}>
-      <Home />
+      <ReduxProvider store={store}>
+        <Home />
+      </ReduxProvider>
     </LinearGradient>
   );
 };

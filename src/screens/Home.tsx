@@ -3,8 +3,12 @@ import { SafeAreaView, StyleSheet, View } from 'react-native';
 import { WelcomeTitle } from '../components/molecule/WelcomeTitle/WelcomeTitle';
 import { List } from '../components/organism/List/List';
 import { CreateTaskModal } from '../components/organism/CreateTaskModel/CreateTaskModal';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store/store';
 
 export const Home = () => {
+  const { taskList } = useSelector((state: RootState) => state);
+
   return (
     <SafeAreaView style={styles.root}>
       <View style={styles.titleContainer}>
