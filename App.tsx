@@ -5,6 +5,7 @@ import { Montserrat_400Regular, Montserrat_900Black } from '@expo-google-fonts/m
 import { preventAutoHideAsync, hideAsync } from 'expo-splash-screen';
 import { loadAsync } from 'expo-font';
 import { useCallback, useEffect, useState } from 'react';
+import { colors } from './assets/const/Colors';
 
 const App = () => {
   const [appIsReady, setAppIsReady] = useState(false);
@@ -40,7 +41,7 @@ const App = () => {
 
   return (
     <LinearGradient
-      colors={['#348F50', '#56B4D3']}
+      colors={[colors.green, colors.lightBlue]}
       start={{ x: 0, y: 0 }}
       end={{ x: 1, y: 1 }}
       style={styles.app}

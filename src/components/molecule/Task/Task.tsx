@@ -1,18 +1,18 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, View, Animated } from 'react-native';
-import { ListCheckButton } from '../atoms/ListCheckButton/ListCheckButton';
+import { CheckButton } from '../../atoms/CheckTaskButton/CheckButton';
 
 type PropsType = {
   task: string;
 };
 
-export const ListItem: React.FC<PropsType> = ({ task }) => {
+export const Task: React.FC<PropsType> = ({ task }) => {
   const [checked, setChecked] = useState(false);
 
   return (
     <View style={styles.root}>
       <View>
-        <ListCheckButton onClick={() => setChecked(!checked)} />
+        <CheckButton onClick={() => setChecked(!checked)} />
       </View>
       <View>
         <Animated.Text style={[styles.text, checked && { textDecorationLine: 'line-through' }]}>

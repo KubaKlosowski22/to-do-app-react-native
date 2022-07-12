@@ -1,7 +1,8 @@
 import React from 'react';
 import { SafeAreaView, StyleSheet, View } from 'react-native';
-import { WelcomeTitle } from '../components/molecule/welcomeTitle/WelcomeTitle';
-import { List } from '../components/organism/list/List';
+import { WelcomeTitle } from '../components/molecule/WelcomeTitle/WelcomeTitle';
+import { List } from '../components/organism/List/List';
+import { CreateTaskModal } from '../components/organism/CreateTaskModel/CreateTaskModal';
 
 export const Home = () => {
   return (
@@ -11,6 +12,9 @@ export const Home = () => {
       </View>
       <View style={styles.contentContainer}>
         <List />
+        <View style={styles.buttonContainer}>
+          <CreateTaskModal />
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -27,5 +31,10 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     flex: 4,
+    alignItems: 'center',
+  },
+  buttonContainer: {
+    marginTop: 20,
+    marginBottom: 30,
   },
 });
